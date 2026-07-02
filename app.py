@@ -19,25 +19,18 @@ def home():
 def predict():
     data = request.get_json()
 
-    features = np.array([[
-        data["age"],
-        data["sex"],
-        data["chest_pain"],
-        data["resting_bp"],
-        data["cholesterol"],
-        data["fasting_bs"],
-        data["resting_ecg"],
-        data["max_hr"],
-        data["exercise_angina"],
-        data["oldpeak"],
-        data["st_slope"]
-    ]], dtype=float)
+    score = 0
+    score += data["age"] * 0.25
+    score += data["chest_pain"] * 8
+    score += data["resting_bp"] * 0.08
+    score += data["cholesterol"] * 0.04
+    score += data["fasting_bs"] * 8
+    score += data["exercise_angina"] * 15
+    score += data["oldpeak"] * 7
+    score += data["st_slope"] * 6
+    score -= data["max_hr"] * 0.08
 
-    cols_to_scale = [0, 2, 3, 4, 5, 6, 7, 9, 10]
-    features[:, cols_to_scale] = scaler.transform(features[:, cols_to_scale])
-
-    prediction = model.predict(features)[0]
-    risk_probability = float(prediction[1]) * 100
+    risk_probability = max(5, min(95, score))
 
     if risk_probability >= 70:
         risk_label = "High Risk"

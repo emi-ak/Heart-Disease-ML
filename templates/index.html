@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Heart Disease Risk Assessment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="app">
+        <h1>Heart Disease Risk Assessment</h1>
+        <p class="subtitle">Answer the questions one at a time to estimate heart disease risk.</p>
+
+        <div class="progress">
+            <div id="progress-bar"></div>
+        </div>
+
+        <div id="question-box"></div>
+
+        <div class="buttons">
+            <button id="back-btn">← Back</button>
+            <button id="next-btn">Next →</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
